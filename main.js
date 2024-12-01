@@ -14,6 +14,12 @@ function createWindow(){
 
 app.whenReady().then(() => {
     ipcMain.handle("ping", () => "pong,pong")
+    ipcMain.handle("username", (event,nome) => {
+        console.log("NOME RECEBIDO: ", nome);
+
+        return nome
+        
+    })
 
     if (BrowserWindow.getAllWindows().length == 0) {
         createWindow();
