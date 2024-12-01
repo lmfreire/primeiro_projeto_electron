@@ -4,11 +4,24 @@ function createWindow(){
     const win = new BrowserWindow({
       width: 800,
       height: 800,
+      autoHideMenuBar: true,
+      backgroundColor: "#CCC",
       webPreferences: {
         preload: path.join(__dirname, 'preload.js')
       }
     })
+
+    const child = new BrowserWindow({
+        parent: win,
+        modal: true,
+        show: false,
+    })
   
+    child.loadURL("https:google.com")
+
+    child.once("ready-to-show", () => {
+        child.show()
+    })
     win.loadFile('index.html')
 }
 
